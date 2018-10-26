@@ -8,6 +8,10 @@ key::set() {
   key=${HOME}/.ssh/${key}
 }
 
+key::unset() {
+  key=
+}
+
 key::has_public() {
   [[ -f "${key}.pub" ]]
 }
@@ -33,17 +37,13 @@ key::configure() {
 }
 
 key::generate() {
-  while true; do
-    key::set
-    ssh-keygen -q -f $key && break
-  done
+  key::set
+  ssh-keygen -q -f $key || key::unset
 }
 
 key::generate_stub() {
-  while true; do
-    key::set
-    ssh-keygen -q -N '' -f $key && break
-  done
+  key::set
+  ssh-keygen -q -N '' -f $key || key::unset
 }
 
 key::read() {
@@ -84,14 +84,13 @@ key::select() {
     fi
   done
   if [[ ${keys[@]} ]]; then
-    while true; do
-      echo "Select a private key:"
-      PS3=
-      select key in "${keys[@]}"; do
-        break
-      done
-      key::is_set && break
+    keys+=("none of the above")
+    echo "Select a private key:"
+    PS3=
+    select key in "${keys[@]}"; do
+      break
     done
+    [[ $key == "none of the above" ]] && key::unset
   else
     echo "no private keys found"
   fi
@@ -129,11 +128,11 @@ key::fetch() {
       case $gpu in
         [Gg]*)
           key::generate
-          key_needs_installation=true
+          key::is_set && key_needs_installation=true
           break;;
         [Pp]*)
           key::generate_stub
-          key::read
+          key::is_set && key::read
           break;;
         [Uu]*)
           key::select
