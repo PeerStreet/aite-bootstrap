@@ -1,6 +1,6 @@
 aite::bootstrap() {
   xcode::needs_installation && xcode::install && xcode::wait_for_installation
-  #aite::clone
+  aite::clone
   aite::install
   aite::cleanup
 }
