@@ -11,5 +11,5 @@ A simple utility that provisions the PeerStreet `aite` CLI
 
 Run the following command from a terminal shell:
 ```
-bash <(curl https://raw.githubusercontent.com/PeerStreet/aite-bootstrap/master/bin/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/PeerStreet/aite-bootstrap/master/bin/install.sh)
 ```
