@@ -4,19 +4,19 @@ debug() {
   [[ $DEBUG == "true" ]]
 }
 
-source_libs() {
-  local files=("key github")
-  for file in $files; do
-    temp=$(mktemp)
-    curl -s -o $temp https://raw.githubusercontent.com/PeerStreet/aite-bootstrap/master/bin/${file}.sh
-    source $temp
-    rm $temp
-  done
+source_remote() {
+  temp=$(mktemp)
+  curl -s -o $temp https://raw.githubusercontent.com/PeerStreet/aite-bootstrap/master/bin/${1}.sh
+  source $temp
+  rm $temp
 }
 
 main() {
   debug && set -x
-  source_libs
+  source_remote "key"
+  source_remote "github"
+  source_remote "aite"
+  source_remote "xcode"
 
   key::set_for_github
   key::is_set && key::agent_add
@@ -29,6 +29,7 @@ main() {
     (key::needs_installation || github::needs_access) && github::install_key
   done
 
+  aite::bootstrap
   key::agent_remove
 }
 
