@@ -12,7 +12,7 @@ github::install_key() {
   (key::has_public || key::write_public) && key::set_public
   github::set_username
   github::set_otp
-  curl -u $github_username -H "X-GitHub-OTP: ${github_otp}" -H "Content-Type: application/json" -d "{\"title\":\"aite-bootstrap\",\"key\":\"${public_key}\"}" https://api.github.com/user/keys
+  curl -u $github_username -H "X-GitHub-OTP: ${github_otp}" -H "Content-Type: application/json" -d "{\"title\":\"kue-bootstrap\",\"key\":\"${public_key}\"}" https://api.github.com/user/keys
 }
 
 github::set_username() {

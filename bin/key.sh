@@ -25,15 +25,15 @@ key::default() {
 }
 
 key::unconfigure() {
-  [[ -f ~/.ssh/config ]] && sed '/# begin aite-bootstrap config/,/# end aite-bootstrap config/d' ~/.ssh/config > ~/.ssh/config
+  [[ -f ~/.ssh/config ]] && sed '/# begin kue-bootstrap config/,/# end kue-bootstrap config/d' ~/.ssh/config > ~/.ssh/config
 }
 
 key::configure() {
   key::unconfigure
-  echo "# begin aite-bootstrap config" >> ~/.ssh/config
+  echo "# begin kue-bootstrap config" >> ~/.ssh/config
   echo "Host github.com" >> ~/.ssh/config
   echo "  IdentityFile ${key}" >> ~/.ssh/config
-  echo "# end aite-bootstrap config" >> ~/.ssh/config
+  echo "# end kue-bootstrap config" >> ~/.ssh/config
 }
 
 key::generate() {
