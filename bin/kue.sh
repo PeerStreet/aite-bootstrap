@@ -9,6 +9,12 @@ kue::install() {
   kue/bin/install.sh
 }
 
+kue::update() {
+  kue::clone
+  kue::install
+  kue::cleanup
+}
+
 kue::cleanup() {
   rm -fr $kue_temp
 }
