@@ -11,8 +11,7 @@ kue::install() {
 
 kue::update() {
   kue::clone
-  cp kue/kue /usr/local/bin
-  cp kue/kue-eks /usr/local/bin
+  kue/bin/update.sh
   kue::cleanup
 }
 
