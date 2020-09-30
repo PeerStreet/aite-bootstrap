@@ -13,3 +13,7 @@ Run the following command from a terminal shell:
 ```
 bash <(curl -s https://raw.githubusercontent.com/PeerStreet/kue-bootstrap/master/bin/install.sh)
 ```
+
+### Tunnelblick
+
+Installation and configuration of Tunnelblick requires user interaction. Please see the [Tunnelblick README](https://github.com/PeerStreet/kue/blob/master/docs/tunnelblick.md) for instructions.
